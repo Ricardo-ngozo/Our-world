@@ -94,7 +94,7 @@ Vite's SPA fallback should serve `index.html` for app routes. Redeploy after cha
 - The map displays OpenStreetMap tiles and places you give it latitude/longitude for; there is no geocoding/address search. The tile provider can observe map tile requests, so don’t add sensitive locations if that metadata exposure is unacceptable.
 - Shared songs store their official link and notes; playback happens on the linked music service, not inside the app.
 - Couple games are lightweight shared prompts/answers, not a full multiplayer game engine with synchronized rounds, game-specific scoring, and relationship statistics.
-- Browser notifications can be permission-gated while the app is open. Reliable push while it is closed needs a push provider, VAPID keys and a server/Edge Function; do not turn on that provider until you configure it.
+- Message and partner-activity alerts are permission-gated in Settings and arrive while the app is open (including a backgrounded tab). Reliable push while it is fully closed needs a push provider, VAPID keys and a server/Edge Function; this app does not configure that provider.
 - Data export currently downloads the relationship metadata and shared feature records. Add a server-side export/delete flow before promising full account erasure or complete media exports.
 - The PWA caches the application shell only. Messaging, sign-in and media need an internet connection.
 - Confirm the relationship start date and the two display names during setup. Back up the Supabase project before storing irreplaceable memories.
