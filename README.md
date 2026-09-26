@@ -19,9 +19,10 @@ Open the localhost address Vite prints. The app deliberately has no demo login a
 
 1. Create a Supabase project and save its Project URL and **publishable** key in `.env.local`.
 2. In Supabase, open **Authentication → Sign In / Providers → Email**. Turn **Allow new users to sign up** off and leave email confirmation on. This is an invite-only app; the React app intentionally has no sign-up screen.
-3. In **Authentication → Users**, choose **Add user → Send invitation** and invite only the two email addresses you and your partner will use. Accept each invitation and set a password. Add `http://localhost:5173/**` to Auth's allowed redirect URLs for development; later add your deployed HTTPS origin there too.
-4. Open **SQL Editor** and run [supabase/migrations/0001_private_pair.sql](supabase/migrations/0001_private_pair.sql) once. It creates the space, member, profile, message, reaction, read receipt, and shared record tables; RLS policies; private storage; and a database trigger that refuses a third member.
-5. In **Authentication → Users**, copy the two invited users' UUIDs. In SQL Editor, create your shared space and add those two members. Replace the sample values with your own:
+3. In **Authentication → URL Configuration**, set **Site URL** to the exact app origin you are using right now. For local development use `http://localhost:5173` (Vite's default); for a deployed app use its HTTPS origin. Under **Redirect URLs**, allow `http://localhost:5173/**` and your deployed HTTPS origin (for example, `https://your-app.example.com/**`). The invite link returns to the Site URL, so a stale value such as `http://localhost:3000` will lead to a connection error. Save these settings before sending an invitation.
+4. In **Authentication → Users**, choose **Add user → Send invitation** and invite only the two email addresses you and your partner will use. Open the newest invitation email on the same device/browser where the app is running, and use the link once before it expires. If Supabase reports `otp_expired` or says the link is invalid, send a fresh invitation and use that newest link; old or already-used links cannot be reused. Accept each invitation and set a password.
+5. Open **SQL Editor** and run [supabase/migrations/0001_private_pair.sql](supabase/migrations/0001_private_pair.sql) once. It creates the space, member, profile, message, reaction, read receipt, and shared record tables; RLS policies; private storage; and a database trigger that refuses a third member.
+6. In **Authentication → Users**, copy the two invited users' UUIDs. In SQL Editor, create your shared space and add those two members. Replace the sample values with your own:
 
 ```sql
 insert into public.spaces (name, start_date)
@@ -40,8 +41,8 @@ values
 
 The database rejects a third member for that space. RLS checks membership on every database and storage operation. A signed-in account without a membership row sees no relationship content. Do not share your Supabase dashboard/admin credentials.
 
-6. Confirm the `couple-private` storage bucket is **private** (the migration creates it that way). Keep public Realtime access disabled; the client uses private channels and membership policies. The migration adds the content tables to the `supabase_realtime` publication.
-7. Start the app, sign into your invited account, edit your profile name, and check chat/media access. Then have your partner sign in with their own invited account on another device. Try that an unrelated account cannot read the space before sharing the app URL.
+7. Confirm the `couple-private` storage bucket is **private** (the migration creates it that way). Keep public Realtime access disabled; the client uses private channels and membership policies. The migration adds the content tables to the `supabase_realtime` publication.
+8. Start the app, sign into your invited account, edit your profile name, and check chat/media access. Then have your partner sign in with their own invited account on another device. Try that an unrelated account cannot read the space before sharing the app URL.
 
 ### What access means here
 
@@ -64,7 +65,7 @@ The deployable files are in `dist/`.
 2. In Vercel, choose **Add New → Project** and import that repository.
 3. Use the Vite preset. The build command is `npm run build`; the output directory is `dist`.
 4. In **Project → Settings → Environment Variables**, add `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` for Production (and Preview only if you want preview builds to connect to real data).
-5. Deploy, copy the HTTPS domain, and add that exact domain to Supabase Auth's allowed redirect URLs.
+5. Deploy, copy the HTTPS domain, set it as Supabase Auth's **Site URL**, and add that exact domain to **Redirect URLs** before sending production invitations.
 
 ### Deploy with Netlify
 
