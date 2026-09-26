@@ -10,4 +10,5 @@
 .chat-main{min-height:0}
 .message-stream{min-height:0;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
 @media(max-width:680px){.chat-layout{height:calc(100dvh - 278px);min-height:320px}.chat-main{min-height:0}.message-stream{min-height:0}}
+.notification-note{font-size:8px;color:var(--muted);line-height:1.5;margin:4px 0 12px}
 
