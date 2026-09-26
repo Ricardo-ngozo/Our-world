@@ -6,3 +6,8 @@
 .compliment-panel{margin:14px 0;padding:17px 18px;border:1px solid #edd8d2;border-radius:14px;background:linear-gradient(120deg,#fff4ef,#f7e5df);display:flex;align-items:center;justify-content:space-between;gap:12px}.compliment-panel h3{font:500 17px 'Playfair Display';margin:6px 0}.compliment-panel p{font-size:9px;color:var(--muted);margin:0}.compliment-panel>div:last-child{display:flex;gap:6px;flex-wrap:wrap}
 .dark .compliment-panel{background:linear-gradient(120deg,#3a292c,#473035);border-color:#594044}
 
+/* Keep the conversation list as the scroll container on desktop and touch devices. */
+.chat-main{min-height:0}
+.message-stream{min-height:0;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+@media(max-width:680px){.chat-layout{height:calc(100dvh - 278px);min-height:320px}.chat-main{min-height:0}.message-stream{min-height:0}}
+
