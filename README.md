@@ -59,6 +59,10 @@ npm run preview
 
 The deployable files are in `dist/`.
 
+### Give the second Render app a different install icon
+
+The original app keeps the burgundy and rose heart icon. To use the blue and gold heart on a second deployment, open that Render service's **Environment** page and add `VITE_APP_VARIANT` with value `second`, then save and redeploy. Leave this variable unset on the original service. Vite applies the icon and PWA manifest at build time. If the app was already installed on a phone, remove the old home-screen shortcut and add it again after the redeploy so the phone refreshes its cached icon.
+
 ### Deploy with Vercel
 
 1. Push this project to a Git repository you control.
