@@ -11,4 +11,5 @@
 .message-stream{min-height:0;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
 @media(max-width:680px){.chat-layout{height:calc(100dvh - 278px);min-height:320px}.chat-main{min-height:0}.message-stream{min-height:0}}
 .notification-note{font-size:8px;color:var(--muted);line-height:1.5;margin:4px 0 12px}
+.presence-tracker{display:flex;align-items:center;gap:11px;min-width:0;color:#79686a;font-size:9px}.presence-tracker span{display:flex;align-items:center;gap:5px;max-width:145px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.online-dot,.away-dot{width:7px;height:7px;border-radius:50%;background:#69a581;flex:0 0 auto}.away-dot{background:#b8a9a5}@media(max-width:680px){.presence-tracker{gap:5px;font-size:7px}.presence-tracker span{max-width:74px}}
 
