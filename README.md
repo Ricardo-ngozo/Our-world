@@ -92,13 +92,14 @@ Vite's SPA fallback should serve `index.html` for app routes. Redeploy after cha
 - Realtime one-to-one text chat, typing/presence, read receipts, replies, edit/delete your own messages, search, reactions, pin/star flags, links, and private image/video/audio uploads and voice recording.
 - Relationship dashboard and day counter, private-until-both-answer daily question, mood check-ins, love pings, saved compliments, memories, journal notes, milestone timeline, songs, Open When letters with unlock times, map-place records, collaborative bucket items, date ideas and couple prompts/games.
 - Responsive desktop/mobile layouts, dark appearance, app manifest, service worker, and browser install flow.
+- Cute, private live alerts for partner messages and shared additions such as songs, journal entries, memories, letters, and plans. A live header tracker shows which section each member is viewing while online.
 
 ## Current limits to understand before relying on it
 
 - The map displays OpenStreetMap tiles and places you give it latitude/longitude for; there is no geocoding/address search. The tile provider can observe map tile requests, so don’t add sensitive locations if that metadata exposure is unacceptable.
 - Shared songs store their official link and notes; playback happens on the linked music service, not inside the app.
 - Couple games are lightweight shared prompts/answers, not a full multiplayer game engine with synchronized rounds, game-specific scoring, and relationship statistics.
-- Message and partner-activity alerts are permission-gated in Settings and arrive while the app is open (including a backgrounded tab). Reliable push while it is fully closed needs a push provider, VAPID keys and a server/Edge Function; this app does not configure that provider.
+- Message and partner-activity alerts are permission-gated in Settings and arrive while the app is open (including a backgrounded tab when browser notifications are allowed). The live section tracker only shows a member while their app is connected. Reliable push while the app is fully closed needs a push provider, VAPID keys and a server/Edge Function; this app does not configure that provider.
 - Data export currently downloads the relationship metadata and shared feature records. Add a server-side export/delete flow before promising full account erasure or complete media exports.
 - The PWA caches the application shell only. Messaging, sign-in and media need an internet connection.
 - Confirm the relationship start date and the two display names during setup. Back up the Supabase project before storing irreplaceable memories.
